@@ -4,5 +4,5 @@ import jsinterop.annotations.JsFunction;
 
 @JsFunction
 public interface OnAdditionalDetailsInterface {
-	void onAdditionalDetails(State state, AdyenDropin dropin);
+	void onAdditionalDetails(State state, Object dropin);
 }
