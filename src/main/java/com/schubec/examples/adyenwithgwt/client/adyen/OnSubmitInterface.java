@@ -5,5 +5,5 @@ import jsinterop.annotations.JsFunction;
 @JsFunction
 
 public interface OnSubmitInterface {
-	void onSubmit(State state, Object dropin);
+	void onSubmit(State state, AdyenDropin dropin);
 }

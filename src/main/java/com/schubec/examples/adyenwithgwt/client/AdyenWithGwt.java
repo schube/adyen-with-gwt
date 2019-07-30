@@ -36,15 +36,15 @@ public class AdyenWithGwt implements EntryPoint {
 			public void onSuccess(Method method, String response) {
 				GWT.log(response);
 				
-				Object parse = Global.JSON.parse(response);
+				Object jsonResponse1 = Global.JSON.parse(response);
 				
 				
            	 //adyendropin
                Configuration configuration = new Configuration();
                configuration.locale= "en_EN";
                configuration.environment="test";
-               configuration.originKey="";
-               configuration.paymentMethodsResponse = parse;
+               configuration.originKey="pub.v2.8015643090761754.aHR0cDovLzEyNy4wLjAuMTo4ODg4.2IZpmudJyAmjWe2_F50puc9YY7ABVHZS_t3BMQjwFP0";
+               configuration.paymentMethodsResponse = jsonResponse1;
                 AdyenCheckout checkout = new AdyenCheckout(configuration);
                
                
@@ -70,8 +70,24 @@ public class AdyenWithGwt implements EntryPoint {
                	GWT.log("On onAdditionalDetails");
                };
                dropinConfiguration.onSubmit = (state,theDropin) -> {
+                   String test = Global.JSON.stringify(state.data);
+               		service.makePayment(test, new TextCallback() {
+						
+						@Override
+						public void onSuccess(Method method, String response) {
+							Object jsonResponse2 = Global.JSON.parse(response);
+							theDropin.handleAction(jsonResponse2);
+						}
+						
+						@Override
+						public void onFailure(Method method, Throwable exception) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+            	   
+            	   
                	
-               	GWT.log("On onSubmit: " + state.data.paymentMethod.type );
                	
                
                	

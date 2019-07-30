@@ -2,6 +2,7 @@ package com.schubec.examples.adyenwithgwt.client.adyen;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
@@ -18,6 +19,11 @@ public interface AdyenService extends RestService{
 	@Path(BASEURL + "/paymentmethods/{country}/{currency}/{amount}")
 	@Consumes("application/json")
 	void order(@PathParam("country") String country,@PathParam("currency") String currency, @PathParam("amount") String amount, TextCallback callback);
+
+	@POST
+	@Path(BASEURL + "/makepayment")
+	@Consumes("application/json")
+	void makePayment(String jsonString, TextCallback callback);
 
 	
 

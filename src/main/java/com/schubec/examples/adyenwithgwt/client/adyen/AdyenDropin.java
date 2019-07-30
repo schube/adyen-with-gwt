@@ -8,6 +8,8 @@ import jsinterop.annotations.JsType;
 public class AdyenDropin {
 	
 	public native void mount(String target);
+
+	public native void handleAction(Object json);
 	
 
 }
