@@ -75,13 +75,26 @@ public class AdyenWithGwt implements EntryPoint {
 						
 						@Override
 						public void onSuccess(Method method, String response) {
+							GWT.log("onSuccess: " + response);
 							Object jsonResponse2 = Global.JSON.parse(response);
-							theDropin.handleAction(jsonResponse2);
+							JsPropertyMap<String> map= Js.uncheckedCast(jsonResponse2);
+							String action = map.get("action");
+							String resultCode = map.get("resultCode");
+							if(action!=null) {
+								theDropin.handleAction(jsonResponse2);
+							} else {
+								if(resultCode.equals("Authorised")) {
+									theDropin.setStatus("success");
+								} else {
+									theDropin.setStatus("error");
+								}
+								
+							}
 						}
 						
 						@Override
 						public void onFailure(Method method, Throwable exception) {
-							// TODO Auto-generated method stub
+							theDropin.setStatus("error");
 							
 						}
 					});

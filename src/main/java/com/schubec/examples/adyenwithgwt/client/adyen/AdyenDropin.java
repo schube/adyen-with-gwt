@@ -10,6 +10,8 @@ public class AdyenDropin {
 	public native void mount(String target);
 
 	public native void handleAction(Object json);
+
+	public native void setStatus(String string);
 	
 
 }
